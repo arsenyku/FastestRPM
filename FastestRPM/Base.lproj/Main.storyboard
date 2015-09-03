@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="dial" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-Au-nwz">
-                                <rect key="frame" x="15" y="150" width="570" height="300"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dial" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-Au-nwz">
+                                <rect key="frame" x="150" y="150" width="300" height="300"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pointer" translatesAutoresizingMaskIntoConstraints="NO" id="iTn-pc-8s8">
                                 <rect key="frame" x="238" y="246" width="240" height="128"/>
@@ -33,10 +33,14 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="OKX-Au-nwz" secondAttribute="centerX" id="6rK-dM-xYd" userLabel="dial horizontal"/>
                             <constraint firstAttribute="centerY" secondItem="OKX-Au-nwz" secondAttribute="centerY" priority="1" id="vhz-Fy-4bv" userLabel="dial vertical"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="8sY-nD-nFf" appends="YES" id="JBk-5i-Ev6"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="dialImageView" destination="OKX-Au-nwz" id="qc1-pI-OEb"/>
@@ -44,6 +48,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="8sY-nD-nFf">
+                    <connections>
+                        <action selector="panGesture:" destination="vXZ-lx-hvc" id="trL-hc-MHf"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
         </scene>
     </scenes>

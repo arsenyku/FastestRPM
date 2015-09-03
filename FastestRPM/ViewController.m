@@ -18,6 +18,9 @@
 
 @implementation ViewController
 
+static float const MinAngle = 230.0f;  // -130 deg
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -36,10 +39,77 @@
     [self.view addConstraints:[self createDialConstraints] ];
     [self.view addConstraints:[self createPointerConstraints] ];
     
-    self.currentAngle = 490.0;
-    [self rotateView:self.pointerContainerView byDegrees:self.currentAngle];
- }
+    [self resetMeter];
+}
 
+
+- (IBAction)panGesture:(id)sender{
+    
+    UIPanGestureRecognizer *panGestureRecognizer = sender;
+
+    NSLog(@"Pan event: State=%ld", (long)panGestureRecognizer.state);
+    switch (panGestureRecognizer.state) {
+        case UIGestureRecognizerStateChanged:
+            [self panningMotionDetected:panGestureRecognizer];
+            break;
+            
+//        case UIGestureRecognizerStateEnded:
+//            [self panningMotionEnded:panGestureRecognizer];
+//            break;
+            
+        default:
+            [self panningMotionEnded:panGestureRecognizer];
+            break;
+    }
+}
+
+-(void)panningMotionDetected:(UIPanGestureRecognizer*)panGestureRecognizer{
+    CGPoint velocityVector = [panGestureRecognizer velocityInView:self.view];
+    float velocity = sqrt( pow( velocityVector.x, 2 ) + pow( velocityVector.y, 2 ) );
+    float angle = [self angleFromVelocity:velocity];
+    
+    //NSLog(@"pan detected: velocity = %f, angle = %f", velocity, angle);
+    
+    self.currentAngle = angle;
+    [self rotateView:self.pointerContainerView byDegrees:self.currentAngle];
+    
+}
+
+-(void)panningMotionEnded:(UIPanGestureRecognizer*)panGestureRecognizer{
+    
+    NSLog(@"pan ended");
+
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.1
+                                     target:self
+                                   selector:@selector(resetMeter)
+                                   userInfo:nil
+                                    repeats:NO];
+};
+
+-(void)resetMeter{
+    NSLog(@"resetMeter");
+
+    self.currentAngle = 130.0f;
+    [self rotateView:self.pointerContainerView byDegrees:self.currentAngle];
+}
+
+
+-(float)angleFromVelocity:(float)velocity{
+    float const minVelocity = 0;
+    float const maxVelocity = 5000;
+    
+    float const maxAngle = -40;  // 320 deg
+    
+    float velocityRange = maxVelocity - minVelocity;
+    float angleRange = fabs(maxAngle - MinAngle);
+    
+    float angle = (velocity / velocityRange) * angleRange;
+    return angle - MinAngle;
+    
+}
+
+#pragma mark - constraints
 
 -(NSArray*)createDialConstraints{
     NSMutableArray* result = [NSMutableArray new];
@@ -157,7 +227,7 @@
 
 -(void)rotateView:(UIView*)view byDegrees:(float)angle{
     float radians = [self radiansFromDegrees:self.currentAngle];
-    NSLog(@"%f rad == %f deg", radians, self.currentAngle);
+    //NSLog(@"%f rad == %f deg", radians, self.currentAngle);
     CGAffineTransform transform = CGAffineTransformMakeRotation(radians);
     view.transform = transform;
 }
@@ -258,7 +328,6 @@
     return newImage;
     
 }
-
 
 
 @end
