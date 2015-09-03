@@ -210,10 +210,6 @@ static float const MinAngle = 230.0f;  // -130 deg
     return [result copy];
 }
 
--(void)matchView:(UIView*)view dimensionsAndPositionWithSourceView:(UIView*)sourceView{
-    view.frame = CGRectMake(sourceView.frame.origin.x, sourceView.frame.origin.y,
-                            sourceView.frame.size.width, sourceView.frame.size.height);
-};
 
 - (IBAction)addTenDegrees:(id)sender {
     self.currentAngle += 10.0;
