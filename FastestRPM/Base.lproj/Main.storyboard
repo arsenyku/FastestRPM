@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,13 +18,26 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dial" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-Au-nwz">
-                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <rect key="frame" x="150" y="118" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" placeholder="YES" id="Hpd-AV-7au"/>
+                                    <constraint firstAttribute="width" constant="300" placeholder="YES" id="Rqm-2Z-EcS"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pointer" translatesAutoresizingMaskIntoConstraints="NO" id="iTn-pc-8s8">
-                                <rect key="frame" x="238" y="246" width="240" height="128"/>
-                            </imageView>
-                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bae-oE-88X">
-                                <rect key="frame" x="93" y="28" width="46" height="30"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tPY-Bs-cg6" userLabel="pointer container">
+                                <rect key="frame" x="271" y="319" width="300" height="300"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="pointer" translatesAutoresizingMaskIntoConstraints="NO" id="iTn-pc-8s8">
+                                        <rect key="frame" x="-50" y="-319" width="400" height="400"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="iTn-pc-8s8" secondAttribute="centerX" placeholder="YES" id="OBo-J2-CYR"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bae-oE-88X">
+                                <rect key="frame" x="66" y="70" width="46" height="30"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -35,14 +49,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="OKX-Au-nwz" secondAttribute="centerX" id="6rK-dM-xYd" userLabel="dial horizontal"/>
-                            <constraint firstAttribute="centerY" secondItem="OKX-Au-nwz" secondAttribute="centerY" priority="1" id="vhz-Fy-4bv" userLabel="dial vertical"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Bae-oE-88X" secondAttribute="leading" constant="-50" id="0Ex-Cr-FD4"/>
+                            <constraint firstAttribute="centerX" secondItem="OKX-Au-nwz" secondAttribute="centerX" placeholder="YES" id="31B-TN-TcE"/>
+                            <constraint firstItem="Bae-oE-88X" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="eLq-0n-YMJ"/>
+                            <constraint firstAttribute="centerY" secondItem="OKX-Au-nwz" secondAttribute="centerY" constant="32" placeholder="YES" id="hYw-BA-19z"/>
+                            <constraint firstItem="OKX-Au-nwz" firstAttribute="height" secondItem="tPY-Bs-cg6" secondAttribute="height" placeholder="YES" id="iou-r5-OOk"/>
+                            <constraint firstItem="OKX-Au-nwz" firstAttribute="centerY" secondItem="tPY-Bs-cg6" secondAttribute="centerY" constant="-201" placeholder="YES" id="jXO-hm-coA"/>
+                            <constraint firstItem="OKX-Au-nwz" firstAttribute="width" secondItem="tPY-Bs-cg6" secondAttribute="width" placeholder="YES" id="pVk-rg-sgu"/>
+                            <constraint firstItem="OKX-Au-nwz" firstAttribute="centerX" secondItem="tPY-Bs-cg6" secondAttribute="centerX" constant="-121" placeholder="YES" id="xjl-wf-Drw"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="8sY-nD-nFf" appends="YES" id="JBk-5i-Ev6"/>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="calibrationButton" destination="Bae-oE-88X" id="kRm-kQ-NnD"/>
                         <outlet property="dialImageView" destination="OKX-Au-nwz" id="qc1-pI-OEb"/>
                         <outlet property="pointerImageView" destination="iTn-pc-8s8" id="s9j-SQ-qZq"/>
                     </connections>
