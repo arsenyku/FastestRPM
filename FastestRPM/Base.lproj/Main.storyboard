@@ -27,12 +27,13 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tPY-Bs-cg6" userLabel="pointer container">
                                 <rect key="frame" x="271" y="319" width="300" height="300"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="pointer" translatesAutoresizingMaskIntoConstraints="NO" id="iTn-pc-8s8">
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pointer" translatesAutoresizingMaskIntoConstraints="NO" id="iTn-pc-8s8">
                                         <rect key="frame" x="-50" y="-319" width="400" height="400"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="iTn-pc-8s8" secondAttribute="centerY" constant="269" id="0PK-Uf-eZ4"/>
                                     <constraint firstAttribute="centerX" secondItem="iTn-pc-8s8" secondAttribute="centerX" placeholder="YES" id="OBo-J2-CYR"/>
                                 </constraints>
                             </view>
